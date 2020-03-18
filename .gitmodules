@@ -1,0 +1,3 @@
+[submodule "GANDissect"]
+	path = GANDissect
+	url = https://github.com/CSAILVision/GANDissect
