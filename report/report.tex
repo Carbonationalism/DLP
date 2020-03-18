@@ -86,46 +86,48 @@ We explore the GAN Dissection method and stuff.
 
 Much research in the field of Deep Learning has worked towards the goal of visualizing and understanding deep neural network architectures (cite much research). Introduce Network Dissection as a means of understanding semantic representation of Convolutional Neural Networks (cite net dissect). 
 
-The field of generative models is a-boomin', and from it many unique models have emerged, including (cite unique models). A dominant/popular model for image generation is the Generative Adversarial Network (cite GANs) and many GAN variants (cite GAN variants, or maybe don't, probably don't blow all our citations so early). All of this research/progress has spawned new research into understanding generative models. And maybe go into some research on generative models (with citations). Since the generative models use 
+The field of generative models is a-boomin', and from it many unique models have emerged, including (cite unique models). A dominant/popular model for image generation is the Generative Adversarial Network (cite GANs) and many GAN variants (cite GAN variants, or maybe don't, probably don't blow all our citations so early). All of this research/progress has spawned new research into understanding generative models. And maybe go into some research on generative models (with citations). Since the generative models make use of neural networks, a lot of the research into network visualization and understanding can be applied. \citet{gandissect2019} adapt their method from \cite{netdissect2017} and build on it to understand and reason about GANs. 
 
 cite spam to be copied:
 \citet{netdissect2017}
-\cite{netdissect2017}
 \citet{gandissect2019}
-\cite{gandissect2019}
 \citet{progan2017}
-\cite{progan2017}
 \citet{stylegan2018}
-\cite{stylegan2018}
 \citet{gan2014}
-\cite{gan2014}
 \citet{synthesizing2016}
-\cite{synthesizing2016}
 \citet{deepvis2015}
-\cite{deepvis2015}
 
 \section{GAN Dissection}
 
-GAN Dissection is accomplished in two parts: dissection and intervention. 
+The paper presents a framework to visualize and understand GANs at the unit-, object-, and scene-level. It aims to understand how different objects and classes of objects are encoded by the GAN.
+
+ A group of interpretable units that are closely related to object concepts are identified using a segmentation-based network dissection method. The causal effect of interpretable units is quantified by measuring the ability of interventions to control objects in the output .The contextual relationship between these units and their surroundings is examined by inserting the discovered object concepts into new images.
+
+The structure of the featuremap is studied in two different phases
+\begin{enumerate} 
+\item Dissection: Identify the classes that have an explicit representation
+\item Intervention: For the represented classes identified through dissection, we identify causal sets of units and measure causal effects between units and object classes by forcing sets of units on and off 
+\end{enumerate}
 
 \subsection{Applications}
 
-%% TODO
-
-Talk about our hypotheses about their method, how we seek to apply it to study other GAN architectures and see if anything interesting happens, etc.
-
+In \citet{gandissect2019} during the continuous intervention phase used to identify sets of causal units, they add a regularization term to find a minimal set of causal units. We hypothesize that this minimization is equivalent to the 
 
 \section{StyleGAN}
 
-Discuss the StyleGAN paper, architecture, their results and experiments, and why we think it would be a good candidate architecture for Dissection and what we might learn
+As an extended version of ProGan, StyleGAN allows for more control in the image synthetic process. This is possible in the ways that the StyleGAN generator was redesigned. Through the use of a mapping network of eight fully connected layers and getting a learned constant, this allows the model to generate a vector that can reduce the correlation between features. Then, learned affine transformations then specialize the vector(denoted at w in the paper) to styles that then control the adaptive instance normalization(AdaIn) where each feature map is normalized separately, and then scaled and biased using scalar components from the style. Lastly, "explicit noise inputs" are then introduced to generate stochastic detail. Compelling enough, this design led to improved generated image quality. Combined with that the generator architecture makes it possible to control the image synthesis through scale-specific modifications to the styles, we believe that this Gan model is a good candidate for our project because it is an interesting alternative extension to ProGan and that we are able to utilize tools that the Gan Dissection paper used as well. Lastly, we believe that studying and performing gan dissection on this model could lead to interesting results.
 
 \section{Methods}
 
-Maybe discuss the GAN Dissection methods in brief
+Our methods for this project involve researching other GAN models we think might yield interested results when studied under the GAN Dissection \cite{gandissect2019} framework. We find a pre-trained GAN and a segmented dataset as a candidate to be examined. We then apply the GAN dissection tool released by \citet{gandissect2019} at \url{http://github.com/CSAILVision/GANDissect} which carries out dissection on the specified model, and this basically carries out the heavy lifting. The tool also produces metrics and visualizations of sets of units with high agreement with specified concepts. 
 
 \subsection{Progressive GANs}
 
-We first replicate (one of) the GAN Dissection experiments of the paper. Discuss details such as datasets used, ProGAN details, dissection details (layer, whatever other adjustable parameters the tool has), oh yeah mention that we use the tool provided at \url{http://github.com/CSAILVision/GANDissect} to do the heavy lifting. 
+We first replicate one of the experiments of \citet{gandissect2019}, using a Progressive GAN (\cite{progan2017}) trained on LSUN living room images, we use the GAN dissection tool to identify units which are highly activated by certain concepts. We analyze the results of this and make sure that they align with the results provided in \citet{gandissect2019}. The metrics provided by the tool will act as a sort of baseline to compare the results on other networks. \citet{gandissect2019} note that GAN dissection should not be used for qualitative comparisons across GAN architectures, but through comparison we seek to reason about why their differences might be so.
+
+\subsection{Challenges / current progress}
+
+As of right now (3/18), we've been working on getting the tool set up to run the dissection. We tried running with CUDA on a personal desktop GPU (running the above experiment) and after getting dependencies working, ran into memory issues running the tool. We plan to try again using a smaller batch size, but will likely need to use cloud computing or the Auburn GPU server. One of our group members has access to a GPU but 
 
 \subsection{StyleGAN }
 
