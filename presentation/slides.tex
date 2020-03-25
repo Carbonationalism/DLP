@@ -1,19 +1,45 @@
-\documentclass[12pt]{beamer}
-\input{./preamble.tex}
-\title{PH}
-\author{PH}
+\documentclass{beamer}
+%\input{./preamble.tex}
+\usepackage{biblatex}
+\title %optional
+{GAN Dissection}
+
+\bibliography{references}
+\bibstyle{IEEETran}
+
+\subtitle{Visualizing and Understanding Generative Adversarial Networks}
+
+\author[Arthur, Doe] % (optional, for multiple authors)
+{David Bau\inst{1}\inst{2} \and Jun-Yan Zhu\inst{1} \and Hendrik Strobelt\inst{2}\inst{3} \and Bolei Zhou\inst{4} \and Joshua B. Tenenbaum\inst{1} \and William T. Freeman\inst{1} \and Antonio Torralba\inst{1}\inst{2}}
+
+\institute[VFU] % (optional)
+{
+  \inst{1}%
+  Massachusetts Institute of Technology
+  \and
+  \inst{2}%
+  MIT-IBM Watson AI Lab
+  \and
+  \inst{3}%
+  IBM Research
+  \and
+  \inst{4}%
+  The Chinese University of Hong Kong
+}
 \date{}
 
 \begin{document}
-\maketitle
 
-\begin{frame}
+\frame{\titlepage}
+
+\frame{
 "Observations of hidden units in large deep neural networks have revealed that human-interpretable concepts sometimes emerge as individual latent variables within those networks"
 
 include introductory network dissection talk because its precursor to GAN dissection but not too much since we covered it in class
-\end{frame}
+}
 
-\begin{frame}
+
+\frame{
 Three step process:
 \begin{enumerate}
 \item Identify a broad set of concepts (segmentation maps), could be specific objects, textures, colors, etc
@@ -25,14 +51,14 @@ Three step process:
 
 but partially nonlocal representations learned in interior layers, and emergent concepts often align with a combination of several hidden units
 
-\end{frame}
+}
 
-\begin{frame}
+\frame{
 Perhaps recap the process of gathering activation maps of each unit, determining quantile $P(\alpha_k > T_k) = 0.005$, upscaling low-resolution activation map to input-resolution annotation mask for a concept, thresholding the upscaled activation map by $T_k$, then evaluating against every concept $c$ in the data set, and then intersection over union score (which has more intuitive understanding visually than formulaic, but it is metrically similar to mutual information)
-\end{frame}
+}
 
-Not for presentation, but for project report 
-"The IoU evaluating the quality of the segmentation of a unit is an objective confidence score for interpretability that is comparable across networks."
+
+
 
 
 \end{document}

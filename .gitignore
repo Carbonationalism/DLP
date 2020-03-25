@@ -4,6 +4,17 @@
 *.aux
 *.bbl
 *.blg
+*.out
+*.xml
+*.toc
+*.nav
+*.bcf
+
+*.zip
 
 # ignore PDFs
 *.pdf
+
+# ignore big experiment dumps from running tool
+experiments/
+

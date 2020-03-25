@@ -1,0 +1,12 @@
+# and stuff in here
+*.aux
+*.bcf
+*.log
+*.nav
+*.out
+*.run.xml
+*.xml
+*.snm
+*.synctex.gz
+*.toc
+!slides.pdf
