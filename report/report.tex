@@ -115,9 +115,17 @@ The structure of the featuremap is studied in two different phases
 \item Intervention: For the represented classes identified through dissection, we identify causal sets of units and measure causal effects between units and object classes by forcing sets of units on and off 
 \end{enumerate}
 
-\subsection{Applications}
+\subsection{Applications / Hypotheses}
 
-In \citet{gandissect2019} during the continuous intervention phase used to identify sets of causal units, they add a regularization term to find a minimal set of causal units. We hypothesize that this minimization is similar to increasing the interpretability / disentanglement of the network measured and studied in \cite{netdissect2017}. So we wish to study the effect of other GAN architectures on this.
+In \citet{gandissect2019} during the continuous intervention phase used to identify sets of causal units, they add a regularization term to find a minimal set of causal units. We hypothesize that this minimization is similar to increasing the interpretability / disentanglement of the network measured and studied in \cite{netdissect2017}. So we wish to study the effect of other GAN architectures on this. 
+
+Another question they raise in the paper is what is making the GAN veto certain interventions while accepting others. Why can we remove certain objects but not remove others (like windows in hotel bedrooms)? Why can we insert a door on a building but not in the sky? How does the GAN represent this stronger association between certain concepts when generating its output? 
+
+Something peculiar that they note in the paper is that the causal units seem most disentangled around layer 4 (in the proGAN that they dissect that is, this is highly likely to vary among different architectures). This seems unusual when compared to their Network Dissection results, which found (high level) human-interpretable concepts to most closely agree with the units at the small end of the network, which seems intuitive since that's where the higher level concepts would be represented. If we then think of the generator of a GAN as an inverse classifier, mapping latent vectors to images, it would seem the most interpretable units would lie somewhat close to the beginning. We think that investigation into this might offer insight into their question of how the network vetoes certain interventions and allow others, as perhaps the concept correlations are generated at the higher level of the network (and not the concepts themselves). 
+
+One way we could investigate this is by manipulation of latent vectors. (cite research on latent space manipulation, addition, etc which might be interesting to investigate with GAN dissection)
+
+Another way of looking at it, that sort of follows that idea of a generator as an "inverse classifier" (wherein the classes are some continuous value in a latent space) is the idea of a the generator as a decoder. If we could train a network to encode the latent vectors given the GAN output, would we see the same phenomenon in its layer interpretability? (In sort of a reverse order of a VAE, though it may be easier and just as interesting to look at a VAE itself). If so, this would point to some sort of architecture-independent, inevitable emergence in the way concepts are represented through the network, dependent on the relationship between the chosen latent space (of which we have control) and the paired outputs.
 
 \section{StyleGAN}
 

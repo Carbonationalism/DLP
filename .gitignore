@@ -4,9 +4,19 @@
 *.aux
 *.bbl
 *.blg
+*.out
+*.xml
+*.toc
+*.nav
+*.bcf
+
+*.zip
 
 # ignore PDFs
 *.pdf
 
 # ignore LSUN repo
 lsun/
+
+# ignore big experiment dumps from running tool
+experiments/

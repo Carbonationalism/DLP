@@ -1,38 +1,97 @@
-\documentclass[12pt]{beamer}
-\input{./preamble.tex}
-\title{PH}
-\author{PH}
+\documentclass{beamer}
+%\input{./preamble.tex}
+\usepackage{biblatex}
+\title %optional
+{GAN Dissection}
+
+\bibliography{references}
+\bibstyle{IEEETran}
+
+\subtitle{Visualizing and Understanding Generative Adversarial Networks}
+
+\author[Arthur, Doe] % (optional, for multiple authors)
+{David Bau\inst{1}\inst{2} \and Jun-Yan Zhu\inst{1} \and Hendrik Strobelt\inst{2}\inst{3} \and Bolei Zhou\inst{4} \and Joshua B. Tenenbaum\inst{1} \and William T. Freeman\inst{1} \and Antonio Torralba\inst{1}\inst{2}}
+
+\institute[VFU] % (optional)
+{
+  \inst{1}%
+  Massachusetts Institute of Technology
+  \and
+  \inst{2}%
+  MIT-IBM Watson AI Lab
+  \and
+  \inst{3}%
+  IBM Research
+  \and
+  \inst{4}%
+  The Chinese University of Hong Kong
+}
 \date{}
 
 \begin{document}
-\maketitle
 
-\begin{frame}
-"Observations of hidden units in large deep neural networks have revealed that human-interpretable concepts sometimes emerge as individual latent variables within those networks"
+\frame{\titlepage}
 
-include introductory network dissection talk because its precursor to GAN dissection but not too much since we covered it in class
+\begin{frame}{Outline}
+\begin{itemize}
+\item Network Dissection
+\item GAN Dissection
+\item Results and Applications
+\end{itemize}
 \end{frame}
 
 \begin{frame}
-Three step process:
+A method of interpreting generative models
+
+Focus is on the generator
+
+Applied in two parts: dissection and intervention
+\end{frame}
+
+\begin{frame}{Network Dissection}
+Three step process applied:
 \begin{enumerate}
 \item Identify a broad set of concepts (segmentation maps), could be specific objects, textures, colors, etc
 \item Gather hidden variables' response to known concepts
 \item Quantify alignment of hidden variable-concept pairs
 \end{enumerate}
+\end{frame}
 
+\begin{frame}
 "In a fully interpretable local coding such as a one-hot encoding, each variable will match with exactly one concept"
 
 but partially nonlocal representations learned in interior layers, and emergent concepts often align with a combination of several hidden units
 
+Ideally we'd like to have disentangled object representations in the network
 \end{frame}
 
 \begin{frame}
-Perhaps recap the process of gathering activation maps of each unit, determining quantile $P(\alpha_k > T_k) = 0.005$, upscaling low-resolution activation map to input-resolution annotation mask for a concept, thresholding the upscaled activation map by $T_k$, then evaluating against every concept $c$ in the data set, and then intersection over union score (which has more intuitive understanding visually than formulaic, but it is metrically similar to mutual information)
+So we need a set of human-interpretable concepts
+
+Attained from semantic segmentation (picture)
+
+This method seeks to measure agreement between \emph{activation units} and (labeled concepts) attained from the segmentation
+% So in contrast to a lot of work in network interpretation that's involved in visualizing networks, this is more semantic, it slaps a label on things. This allows us to quantify that agreement both unit-wise and network-wise
+Then quantify that agreement to identify highly-activated units for specific concepts as well as quantify the network interpretability as a whole
 \end{frame}
 
-Not for presentation, but for project report 
-"The IoU evaluating the quality of the segmentation of a unit is an objective confidence score for interpretability that is comparable across networks."
+\begin{frame}{Method (of Network Dissect)}% this would be better split into multiple slides with pictures
+"Dissect" the network at a specific layer
+
+Look through units of the feature map (depth slices of the output which share the same filter and look for the same feature)
+
+For a specific image, obtain the activation at that unit by running it through the network
+
+Upscale and threshold the activation map into a binary segmentation of its own
+
+For each concept in the semantic segmentation of the image, measure alignment with between the concept and the binary segmentation
+\end{frame}
+
+\begin{frame}
+Alignment quantified using Intersection over Union (pictures)
+\end{frame}
+
+
 
 
 \end{document}
