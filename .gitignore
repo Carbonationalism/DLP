@@ -7,3 +7,6 @@
 
 # ignore PDFs
 *.pdf
+
+# ignore LSUN repo
+lsun/
