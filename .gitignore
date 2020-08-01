@@ -14,9 +14,17 @@
 
 # ignore PDFs
 *.pdf
+!report.pdf
 
 # ignore LSUN repo
 lsun/
 
 # ignore big experiment dumps from running tool
 experiments/
+
+*.pth
+*.pt
+*.pkl
+
+results/
+!results/readme.md

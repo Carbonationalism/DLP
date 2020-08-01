@@ -1,0 +1,4 @@
+# Links
+* livingroom.zip - broken, these results may have been lost in the wind somewhere but it's the same model they train in the original paper and our results were pretty much the same.
+* [p2pchurch.zip](https://drive.google.com/file/d/19UyPWrBxbSQDk9Tnwoh0rQ9uTq-vlShN/view?usp=sharing) - pix2pix we trained on LSUN churches, it didn't turn out too well, not sure if that's due to our training method (segmented pictures to their originals) or maybe we just didn't train it long enough.
+* [sytlegan.zip](https://drive.google.com/file/d/1P5xuY5fH24r7ya7o1RkJm0pJzNRAkOYH/view?usp=sharing) - stylegan trained on LSUN bedrooms. This one's pretty interesting, we only checked at a few layers but some of the earlier layers (coarser styles) are pretty interesting, like one unit that turned on or off central pillows on beds.
